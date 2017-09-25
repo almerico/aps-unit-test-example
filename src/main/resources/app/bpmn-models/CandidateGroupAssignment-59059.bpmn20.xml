@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20170925171853434" modeler:modelId="59059" modeler:modelVersion="2" modeler:modelLastUpdated="1506377332006">
+  <process id="CandidateGroupAssignment" name="Candidate Group Assignment" isExecutable="true">
+    <startEvent id="startEvent1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[startEvent1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </startEvent>
+    <userTask id="sid-61B25FDD-EC4B-4B18-8C4F-4A307840D9EC" name="Group Assignment" activiti:candidateGroups="4004,6007">
+      <extensionElements>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:group-info-name-4004><![CDATA[group1]]></modeler:group-info-name-4004>
+        <modeler:group-info-name-6007><![CDATA[group2]]></modeler:group-info-name-6007>
+        <modeler:activiti-idm-candidate-group><![CDATA[true]]></modeler:activiti-idm-candidate-group>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[sid-61B25FDD-EC4B-4B18-8C4F-4A307840D9EC]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-94736E4C-8D51-4137-B064-3C3109F61890" sourceRef="startEvent1" targetRef="sid-61B25FDD-EC4B-4B18-8C4F-4A307840D9EC">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-94736E4C-8D51-4137-B064-3C3109F61890]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <endEvent id="sid-7CEA67E8-B47D-496B-B64B-5CCC80740BAC">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-7CEA67E8-B47D-496B-B64B-5CCC80740BAC]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="sid-B95C9185-511E-4558-A751-415929D8C9BE" sourceRef="sid-61B25FDD-EC4B-4B18-8C4F-4A307840D9EC" targetRef="sid-7CEA67E8-B47D-496B-B64B-5CCC80740BAC">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-B95C9185-511E-4558-A751-415929D8C9BE]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_CandidateGroupAssignment">
+    <bpmndi:BPMNPlane bpmnElement="CandidateGroupAssignment" id="BPMNPlane_CandidateGroupAssignment">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="90.0" y="150.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-61B25FDD-EC4B-4B18-8C4F-4A307840D9EC" id="BPMNShape_sid-61B25FDD-EC4B-4B18-8C4F-4A307840D9EC">
+        <omgdc:Bounds height="80.0" width="100.0" x="165.0" y="125.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-7CEA67E8-B47D-496B-B64B-5CCC80740BAC" id="BPMNShape_sid-7CEA67E8-B47D-496B-B64B-5CCC80740BAC">
+        <omgdc:Bounds height="28.0" width="28.0" x="310.0" y="151.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-94736E4C-8D51-4137-B064-3C3109F61890" id="BPMNEdge_sid-94736E4C-8D51-4137-B064-3C3109F61890">
+        <omgdi:waypoint x="120.0" y="165.0"/>
+        <omgdi:waypoint x="165.0" y="165.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-B95C9185-511E-4558-A751-415929D8C9BE" id="BPMNEdge_sid-B95C9185-511E-4558-A751-415929D8C9BE">
+        <omgdi:waypoint x="265.0" y="165.0"/>
+        <omgdi:waypoint x="310.0" y="165.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

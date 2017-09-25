@@ -2,11 +2,8 @@ package com.alfresco.aps.test.process;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import org.activiti.engine.repository.Deployment;
 import org.junit.After;
 import org.junit.Before;
@@ -28,12 +25,12 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
-public class UserTaskUnitTest extends AbstractTest {
+public class UserAssignmentUnitTest extends AbstractTest {
 
 	static // Process info.
 	String appName = "Test App";
 	static String appResourcePath = "app";
-	String processDefinitionKey = "UserTaskProcess";
+	String processDefinitionKey = "UserAssignment";
 	String bpmnFilePath = "src/main/resources/app/bpmn-models";
 
 	@BeforeClass
@@ -65,16 +62,14 @@ public class UserTaskUnitTest extends AbstractTest {
 
 	@Test
 	public void testProcessExecution() throws Exception {
-		Map<String, Object> processVars = new HashMap<String, Object>();
-		processVars.put("initiator", "$INITIATOR");
-		ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(processDefinitionKey, processVars);
+
+		ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(processDefinitionKey);
 
 		assertNotNull(processInstance);
 		
 		assertEquals(1, taskService.createTaskQuery().count());
-
 		Task task = taskService.createTaskQuery().singleResult();
-		unitTestHelpers.assertUserAssignment("$INITIATOR", task, false, false);
+		unitTestHelpers.assertUserAssignment("user1@example.com", task, true, false);
 		
 		taskService.complete(task.getId());
 
