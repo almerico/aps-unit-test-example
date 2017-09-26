@@ -30,12 +30,12 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
-public class APSRestStepProcessUnitTest extends AbstractTest {
+public class IntermediateTimerCatchProcessUnitTest extends AbstractTest {
 
 	static // Process info.
 	String appName = "Test App";
 	static String appResourcePath = "app";
-	String processDefinitionKey = "APSRestStepProcess";
+	String processDefinitionKey = "IntermediateTimerCatchProcess";
 	String bpmnFilePath = "src/main/resources/app/bpmn-models";
 
 	@BeforeClass
@@ -55,18 +55,6 @@ public class APSRestStepProcessUnitTest extends AbstractTest {
 						.addInputStream(bpmnXml, new FileInputStream(bpmnXml)).deploy();
 			}
 		}
-
-		doAnswer(new Answer<Void>() {
-			@Override
-			public Void answer(InvocationOnMock invocation) throws Throwable {
-				Object[] arg = invocation.getArguments();
-				DelegateExecution execution = (DelegateExecution) arg[0];
-				System.out.println("Process ID is " + execution.getProcessInstanceId());
-				// mock as if the rest step sets a variable
-				execution.setVariable("restResponse", "{}");
-				return null;
-			}
-		}).when(activiti_restCallDelegate).execute((DelegateExecution) any());
 	}
 
 	@After
@@ -85,10 +73,11 @@ public class APSRestStepProcessUnitTest extends AbstractTest {
 
 		assertNotNull(processInstance);
 
-		//Wait for async step to execute
-		unitTestHelpers.waitForJobExecutorToProcessAllJobs(5000, 100);
 
-		verify(activiti_restCallDelegate, times(1)).execute((DelegateExecution) any());
+		//Assert in seconds and execute/action timer
+		unitTestHelpers.assertTimerJobsTimeInSecondsLowerThan(300, true);
+		//Assert days and execute/action timer
+		unitTestHelpers.assertTimerJobDateLowerThan(1, true);
 
 		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
 	}

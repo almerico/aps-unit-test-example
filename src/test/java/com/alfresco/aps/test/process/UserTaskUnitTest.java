@@ -74,6 +74,9 @@ public class UserTaskUnitTest extends AbstractTest {
 		assertEquals(1, taskService.createTaskQuery().count());
 
 		Task task = taskService.createTaskQuery().singleResult();
+		
+		unitTestHelpers.assertTaskDueDate(1, task.getDueDate());
+		
 		unitTestHelpers.assertUserAssignment("$INITIATOR", task, false, false);
 		
 		taskService.complete(task.getId());
