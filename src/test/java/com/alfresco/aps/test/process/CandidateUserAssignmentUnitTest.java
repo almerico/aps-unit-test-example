@@ -41,7 +41,7 @@ public class CandidateUserAssignmentUnitTest extends AbstractTest {
 	@Before
 	public void before() throws Exception {
 
-		Iterator it = FileUtils.iterateFiles(new File(bpmnFilePath), null, false);
+		Iterator<File> it = FileUtils.iterateFiles(new File(bpmnFilePath), null, false);
 		while (it.hasNext()) {
 			String bpmnXml = ((File) it.next()).getPath();
 			String extension = FilenameUtils.getExtension(bpmnXml);

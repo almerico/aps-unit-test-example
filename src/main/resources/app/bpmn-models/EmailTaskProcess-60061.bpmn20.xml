@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20170928134527619" modeler:modelId="60061" modeler:modelVersion="2" modeler:modelLastUpdated="1506540840808" modeler:originalModelId="60060" modeler:originalModelVersion="1">
+  <process id="EmailTaskProcess" name="EmailTaskProcess" isExecutable="true">
+    <startEvent id="startEvent1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[startEvent1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </startEvent>
+    <endEvent id="sid-05C0B319-D826-40F8-B22B-4839EAE1CC54">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-05C0B319-D826-40F8-B22B-4839EAE1CC54]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="sid-CAE93615-F31B-4BA3-B6F5-914E7C44573D" sourceRef="startEvent1" targetRef="sid-F2712B79-5DC2-4062-8C48-08FA59EA0FE9">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-CAE93615-F31B-4BA3-B6F5-914E7C44573D]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-15611652-E677-40CA-898C-ADE32A2D06CF" sourceRef="sid-F2712B79-5DC2-4062-8C48-08FA59EA0FE9" targetRef="sid-05C0B319-D826-40F8-B22B-4839EAE1CC54">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-15611652-E677-40CA-898C-ADE32A2D06CF]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <serviceTask id="sid-F2712B79-5DC2-4062-8C48-08FA59EA0FE9" name="Email Task" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string><![CDATA[to@example.com]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string><![CDATA[from@example.com]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string><![CDATA[subject data]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="cc">
+          <activiti:string><![CDATA[cc@example.com]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="bcc">
+          <activiti:string><![CDATA[bcc@example.com]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:string><![CDATA[text data]]></activiti:string>
+        </activiti:field>
+        <modeler:editor-resource-id><![CDATA[sid-F2712B79-5DC2-4062-8C48-08FA59EA0FE9]]></modeler:editor-resource-id>
+      </extensionElements>
+    </serviceTask>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_EmailTaskProcess">
+    <bpmndi:BPMNPlane bpmnElement="EmailTaskProcess" id="BPMNPlane_EmailTaskProcess">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-05C0B319-D826-40F8-B22B-4839EAE1CC54" id="BPMNShape_sid-05C0B319-D826-40F8-B22B-4839EAE1CC54">
+        <omgdc:Bounds height="28.0" width="28.0" x="495.0" y="164.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F2712B79-5DC2-4062-8C48-08FA59EA0FE9" id="BPMNShape_sid-F2712B79-5DC2-4062-8C48-08FA59EA0FE9">
+        <omgdc:Bounds height="80.0" width="100.0" x="255.0" y="135.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-CAE93615-F31B-4BA3-B6F5-914E7C44573D" id="BPMNEdge_sid-CAE93615-F31B-4BA3-B6F5-914E7C44573D">
+        <omgdi:waypoint x="130.0" y="178.0"/>
+        <omgdi:waypoint x="192.5" y="178.0"/>
+        <omgdi:waypoint x="192.5" y="175.0"/>
+        <omgdi:waypoint x="255.0" y="175.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-15611652-E677-40CA-898C-ADE32A2D06CF" id="BPMNEdge_sid-15611652-E677-40CA-898C-ADE32A2D06CF">
+        <omgdi:waypoint x="355.0" y="175.0"/>
+        <omgdi:waypoint x="425.0" y="175.0"/>
+        <omgdi:waypoint x="425.0" y="178.0"/>
+        <omgdi:waypoint x="495.0" y="178.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

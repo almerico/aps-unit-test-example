@@ -5,16 +5,12 @@ import java.io.FileInputStream;
 import java.util.Iterator;
 import java.util.List;
 
-import org.activiti.engine.delegate.DelegateExecution;
-import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.repository.Deployment;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -26,7 +22,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
@@ -46,7 +41,7 @@ public class SignalCatchProcessUnitTest extends AbstractTest {
 	@Before
 	public void before() throws Exception {
 
-		Iterator it = FileUtils.iterateFiles(new File(bpmnFilePath), null, false);
+		Iterator<File> it = FileUtils.iterateFiles(new File(bpmnFilePath), null, false);
 		while (it.hasNext()) {
 			String bpmnXml = ((File) it.next()).getPath();
 			String extension = FilenameUtils.getExtension(bpmnXml);
@@ -75,14 +70,14 @@ public class SignalCatchProcessUnitTest extends AbstractTest {
 
 
 		//Assert signal and not execute
-		unitTestHelpers.assertSignalWait("signal-catch", false, null);
+		unitTestHelpers.assertSignalWait(1, null, "signal-catch", false, null);
 		//Assert boundary signal and not execute
-		unitTestHelpers.assertSignalWait("signal-boundary", false, null);
+		unitTestHelpers.assertSignalWait(1, null, "signal-boundary", false, null);
 		
 		//Assert signal and execute
-		unitTestHelpers.assertSignalWait("signal-catch", true, null);
+		unitTestHelpers.assertSignalWait(1, null, "signal-catch", true, null);
 		//Assert boundary signal and execute
-		unitTestHelpers.assertSignalWait("signal-boundary", true, null);
+		unitTestHelpers.assertSignalWait(1, null, "signal-boundary", true, null);
 
 		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
 	}

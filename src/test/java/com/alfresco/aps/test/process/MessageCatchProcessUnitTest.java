@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Iterator;
 import java.util.List;
+
 import org.activiti.engine.repository.Deployment;
 import org.junit.After;
 import org.junit.Before;
@@ -17,7 +18,6 @@ import com.alfresco.aps.testutils.AbstractTest;
 import com.alfresco.aps.testutils.resources.ActivitiResources;
 
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
@@ -25,12 +25,12 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
-public class CandidateGroupAssignmentUnitTest extends AbstractTest {
+public class MessageCatchProcessUnitTest extends AbstractTest {
 
 	static // Process info.
 	String appName = "Test App";
 	static String appResourcePath = "app";
-	String processDefinitionKey = "CandidateGroupAssignment";
+	String processDefinitionKey = "MessageCatch";
 	String bpmnFilePath = "src/main/resources/app/bpmn-models";
 
 	@BeforeClass
@@ -46,7 +46,7 @@ public class CandidateGroupAssignmentUnitTest extends AbstractTest {
 			String bpmnXml = ((File) it.next()).getPath();
 			String extension = FilenameUtils.getExtension(bpmnXml);
 			if (extension.equals("xml")) {
-				repositoryService.createDeployment()
+				activitiRule.getRepositoryService().createDeployment()
 						.addInputStream(bpmnXml, new FileInputStream(bpmnXml)).deploy();
 			}
 		}
@@ -63,15 +63,21 @@ public class CandidateGroupAssignmentUnitTest extends AbstractTest {
 	@Test
 	public void testProcessExecution() throws Exception {
 
-		ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(processDefinitionKey);
+		ProcessInstance processInstance = activitiRule.getRuntimeService()
+				.startProcessInstanceByKey(processDefinitionKey);
 
 		assertNotNull(processInstance);
+
+
+		//Assert message and not execute
+		unitTestHelpers.assertMessageWait(1, null, "message-catch", false, null);
+		//Assert boundary message and not execute
+		unitTestHelpers.assertMessageWait(1, null, "message-boundary", false, null);
 		
-		assertEquals(1, taskService.createTaskQuery().count());
-		Task task = taskService.createTaskQuery().singleResult();
-		unitTestHelpers.assertCandidateAssignment(new String[]{"group1", "group2"}, null, task, true, false);
-		
-		taskService.complete(task.getId());
+		//Assert message and execute
+		unitTestHelpers.assertMessageWait(1, null, "message-catch", true, null);
+		//Assert boundary message and execute
+		unitTestHelpers.assertMessageWait(1, null, "message-boundary", true, null);
 
 		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
 	}

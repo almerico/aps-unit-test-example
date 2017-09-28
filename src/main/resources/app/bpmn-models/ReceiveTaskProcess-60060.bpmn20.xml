@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20170928134527661" modeler:modelId="58060" modeler:modelVersion="4" modeler:modelLastUpdated="1506540422235" modeler:originalModelId="58059" modeler:originalModelVersion="3">
-  <process id="APSRestStepProcess" name="APSRestStepProcess" isExecutable="true">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20170928134527623" modeler:modelId="60060" modeler:modelVersion="2" modeler:modelLastUpdated="1506540422102" modeler:originalModelId="58060" modeler:originalModelVersion="3">
+  <process id="ReceiveTaskProcess" name="ReceiveTaskProcess" isExecutable="true">
     <startEvent id="startEvent1">
       <extensionElements>
         <modeler:editor-resource-id><![CDATA[startEvent1]]></modeler:editor-resource-id>
@@ -21,20 +21,14 @@
         <modeler:editor-resource-id><![CDATA[sid-C9DA9AC2-2007-400E-929A-F35E34440118]]></modeler:editor-resource-id>
       </extensionElements>
     </sequenceFlow>
-    <serviceTask id="sid-AB2E4A5F-4BF6-48BE-8FF1-CDE01687E69A" name="Rest Call" activiti:async="true" activiti:delegateExpression="${activiti_restCallDelegate}">
+    <receiveTask id="sid-AB2E4A5F-4BF6-48BE-8FF1-CDE01687E69A" name="Rest Call">
       <extensionElements>
-        <activiti:field name="restUrl">
-          <activiti:string><![CDATA[https://api.github.com/]]></activiti:string>
-        </activiti:field>
-        <activiti:field name="httpMethod">
-          <activiti:string><![CDATA[GET]]></activiti:string>
-        </activiti:field>
-        <modeler:editor-resource-id><![CDATA[sid-8124CB5D-BD47-49CD-B013-F7FFB576DE8D]]></modeler:editor-resource-id>
+        <modeler:editor-resource-id><![CDATA[sid-381E1F61-A2F7-41A0-BA92-BF3E29586051]]></modeler:editor-resource-id>
       </extensionElements>
-    </serviceTask>
+    </receiveTask>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_APSRestStepProcess">
-    <bpmndi:BPMNPlane bpmnElement="APSRestStepProcess" id="BPMNPlane_APSRestStepProcess">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_ReceiveTaskProcess">
+    <bpmndi:BPMNPlane bpmnElement="ReceiveTaskProcess" id="BPMNPlane_ReceiveTaskProcess">
       <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
         <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"/>
       </bpmndi:BPMNShape>
