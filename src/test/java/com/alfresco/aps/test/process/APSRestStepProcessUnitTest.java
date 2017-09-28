@@ -2,6 +2,7 @@ package com.alfresco.aps.test.process;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,8 +59,13 @@ public class APSRestStepProcessUnitTest extends AbstractTest {
 		doAnswer(new Answer<Void>() {
 			@Override
 			public Void answer(InvocationOnMock invocation) throws Throwable {
+				
 				Object[] arg = invocation.getArguments();
 				DelegateExecution execution = (DelegateExecution) arg[0];
+				HashMap<String, String> fieldExtensions = new HashMap<String, String>();
+				fieldExtensions.put("restUrl", "https://api.github.com/");
+				fieldExtensions.put("httpMethod", "GET");
+				unitTestHelpers.assertFieldExtensions(2, execution, fieldExtensions);
 				System.out.println("Process ID is " + execution.getProcessInstanceId());
 				// mock as if the rest step sets a variable
 				execution.setVariable("restResponse", "{}");
