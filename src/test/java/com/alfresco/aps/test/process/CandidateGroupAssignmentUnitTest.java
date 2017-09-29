@@ -7,10 +7,10 @@ import java.util.List;
 import org.activiti.engine.repository.Deployment;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractTest;
@@ -25,23 +25,21 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
+@TestPropertySource(value="classpath:local-dev-test.properties")
 public class CandidateGroupAssignmentUnitTest extends AbstractTest {
-
-	static // Process info.
+	
 	String appName = "Test App";
-	static String appResourcePath = "app";
 	String processDefinitionKey = "CandidateGroupAssignment";
-	String bpmnFilePath = "src/main/resources/app/bpmn-models";
 
-	@BeforeClass
-	public static void beforeClass() throws Exception {
-		ActivitiResources.force(appName, appResourcePath);
-	}
 	
 	@Before
 	public void before() throws Exception {
-
-		Iterator<File> it = FileUtils.iterateFiles(new File(bpmnFilePath), null, false);
+		
+		if(env.getProperty ("aps.app.download", Boolean.class, false)){
+			ActivitiResources.forceGet(appName);
+		}
+		
+		Iterator<File> it = FileUtils.iterateFiles(new File(BPMN_RESOURCE_PATH), null, false);
 		while (it.hasNext()) {
 			String bpmnXml = ((File) it.next()).getPath();
 			String extension = FilenameUtils.getExtension(bpmnXml);

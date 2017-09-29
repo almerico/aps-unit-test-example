@@ -25,3 +25,6 @@ hs_err_pid*
 .classpath
 .project
 .settings/
+
+src/test/resources/activiti-resources.properties
+src/test/resources/local-dev-test.properties
