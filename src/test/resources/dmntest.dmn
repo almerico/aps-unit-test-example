@@ -1,0 +1,20 @@
+<definitions xmlns="http://www.omg.org/spec/DMN/20151130" id="definition_63063" name="dmntest" namespace="http://www.activiti.org/dmn">
+  <decision id="dmntest" name="dmntest">
+    <decisionTable id="decisionTable_63063" hitPolicy="FIRST">
+      <input label="input">
+        <inputExpression id="inputExpression_3" typeRef="string">
+          <text>input</text>
+        </inputExpression>
+      </input>
+      <output id="outputExpression_4" label="output" name="output" typeRef="string"/>
+      <rule>
+        <inputEntry id="inputEntry_3_1">
+          <text>== "xyz"</text>
+        </inputEntry>
+        <outputEntry id="outputEntry_4_1">
+          <text>"abc"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
