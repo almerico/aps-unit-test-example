@@ -24,6 +24,7 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
+import static com.alfresco.aps.testutils.TestUtilsConstants.*;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -72,8 +73,8 @@ public class UserTaskUnitTest extends AbstractTest {
 
 		Task task = taskService.createTaskQuery().singleResult();
 		
-		unitTestHelpers.assertTaskDueDate(1, task.getDueDate());
-		
+		unitTestHelpers.assertTaskDueDate(1, TIME_UNIT_DAY, task);
+
 		unitTestHelpers.assertUserAssignment("$INITIATOR", task, false, false);
 		
 		taskService.complete(task.getId());
