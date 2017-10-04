@@ -34,6 +34,7 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
+import static com.alfresco.aps.testutils.TestUtilsConstants.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -133,7 +134,7 @@ public class CustomListenersUnitTest extends AbstractTest {
 		
 		taskService.complete(task.getId());
 		
-		unitTestHelpers.assertTimerJobsTimeInSecondsLowerThan(120, true);
+		unitTestHelpers.assertTimerJob(1, 2, TIME_UNIT_MINUTE, true);
 		
 		verify(timerFiredEventListener, times(1)).onEvent((ActivitiEvent) any());
 		

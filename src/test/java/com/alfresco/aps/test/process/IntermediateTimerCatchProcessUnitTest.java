@@ -21,6 +21,7 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
+import static com.alfresco.aps.testutils.TestUtilsConstants.*;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -67,9 +68,9 @@ public class IntermediateTimerCatchProcessUnitTest extends AbstractTest {
 
 
 		//Assert in seconds and execute/action timer
-		unitTestHelpers.assertTimerJobsTimeInSecondsLowerThan(300, true);
+		unitTestHelpers.assertTimerJob(1, 5, TIME_UNIT_MINUTE, true);
 		//Assert days and execute/action timer
-		unitTestHelpers.assertTimerJobDateLowerThan(1, true);
+		unitTestHelpers.assertTimerJob(1, 1, TIME_UNIT_DAY, true);
 
 		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
 	}

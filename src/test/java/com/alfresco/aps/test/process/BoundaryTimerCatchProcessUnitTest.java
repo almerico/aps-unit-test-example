@@ -22,6 +22,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import static org.junit.Assert.*;
+import static com.alfresco.aps.testutils.TestUtilsConstants.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
@@ -67,9 +68,9 @@ public class BoundaryTimerCatchProcessUnitTest extends AbstractTest {
 
 
 		//Assert in seconds and execute/action timer
-		unitTestHelpers.assertTimerJobsTimeInSecondsLowerThan(300, true);
+		unitTestHelpers.assertTimerJob(1, 5, TIME_UNIT_MINUTE, true);
 		//Assert days and execute/action timer
-		unitTestHelpers.assertTimerJobDateLowerThan(1, true);
+		unitTestHelpers.assertTimerJob(1, 1, TIME_UNIT_DAY, true);
 
 		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
 	}
