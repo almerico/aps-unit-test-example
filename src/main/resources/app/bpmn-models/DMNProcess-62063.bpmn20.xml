@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171004170221048" modeler:modelId="62063" modeler:modelVersion="1" modeler:modelLastUpdated="1507153593043">
+  <process id="DMNProcess" name="DMNProcess" isExecutable="true">
+    <startEvent id="startEvent1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[startEvent1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </startEvent>
+    <sequenceFlow id="sid-2ADB1E3A-83C0-4B92-BA94-A82CA2F74572" sourceRef="startEvent1" targetRef="sid-64984886-E2FE-4A97-8886-D8482220FAAB">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-2ADB1E3A-83C0-4B92-BA94-A82CA2F74572]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <endEvent id="sid-03632310-A627-402A-990E-0E9CD0B6B1D4">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-03632310-A627-402A-990E-0E9CD0B6B1D4]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <serviceTask id="sid-64984886-E2FE-4A97-8886-D8482220FAAB" activiti:delegateExpression="${activiti_executeDecisionDelegate}">
+      <extensionElements>
+        <activiti:field name="decisionTableReferenceKey">
+          <activiti:string><![CDATA[dmntest]]></activiti:string>
+        </activiti:field>
+        <modeler:decisiontable-reference modeler:decisiontablereferenceid="62062" modeler:decisiontablereferencename="dmntest"/>
+        <modeler:editor-resource-id><![CDATA[sid-64984886-E2FE-4A97-8886-D8482220FAAB]]></modeler:editor-resource-id>
+      </extensionElements>
+    </serviceTask>
+    <exclusiveGateway id="sid-FD0EDD75-A1F6-49B1-A1F6-0BD4226C20EE" name="Rule Evaluated?" default="sid-8C7F03DA-BF98-4D85-879E-406F162D39F1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-FD0EDD75-A1F6-49B1-A1F6-0BD4226C20EE]]></modeler:editor-resource-id>
+      </extensionElements>
+    </exclusiveGateway>
+    <sequenceFlow id="sid-C9B0A1A2-4A33-40FF-9490-EF40A08D48A0" sourceRef="sid-64984886-E2FE-4A97-8886-D8482220FAAB" targetRef="sid-FD0EDD75-A1F6-49B1-A1F6-0BD4226C20EE">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-C9B0A1A2-4A33-40FF-9490-EF40A08D48A0]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <userTask id="sid-22693457-EE61-4DBB-BBA2-576D84650B2C" name="Rule Not Evaluated" activiti:assignee="$INITIATOR">
+      <extensionElements>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:activiti-idm-initiator><![CDATA[true]]></modeler:activiti-idm-initiator>
+        <modeler:editor-resource-id><![CDATA[sid-22693457-EE61-4DBB-BBA2-576D84650B2C]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <endEvent id="sid-E73BF4C9-5022-467D-AF29-3AF66B1A1703">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-E73BF4C9-5022-467D-AF29-3AF66B1A1703]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="sid-E742E135-82CD-4FB0-A64E-60A73617C0B5" sourceRef="sid-22693457-EE61-4DBB-BBA2-576D84650B2C" targetRef="sid-E73BF4C9-5022-467D-AF29-3AF66B1A1703">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-E742E135-82CD-4FB0-A64E-60A73617C0B5]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-391436E7-66C6-46B4-8465-9A649F0AFF8D" name="Yes" sourceRef="sid-FD0EDD75-A1F6-49B1-A1F6-0BD4226C20EE" targetRef="sid-03632310-A627-402A-990E-0E9CD0B6B1D4">
+      <extensionElements>
+        <modeler:conditionDefinition modeler:index="0" modeler:leftRestResponseId="output" modeler:rightValue="abc" modeler:operator="=="/>
+        <modeler:editor-resource-id><![CDATA[sid-391436E7-66C6-46B4-8465-9A649F0AFF8D]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(activiti_flowConditionsBean.exists(execution, 'output') && output == 'abc')}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-8C7F03DA-BF98-4D85-879E-406F162D39F1" name="No" sourceRef="sid-FD0EDD75-A1F6-49B1-A1F6-0BD4226C20EE" targetRef="sid-22693457-EE61-4DBB-BBA2-576D84650B2C">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-8C7F03DA-BF98-4D85-879E-406F162D39F1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_DMNProcess">
+    <bpmndi:BPMNPlane bpmnElement="DMNProcess" id="BPMNPlane_DMNProcess">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-03632310-A627-402A-990E-0E9CD0B6B1D4" id="BPMNShape_sid-03632310-A627-402A-990E-0E9CD0B6B1D4">
+        <omgdc:Bounds height="28.0" width="28.0" x="510.0" y="164.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-64984886-E2FE-4A97-8886-D8482220FAAB" id="BPMNShape_sid-64984886-E2FE-4A97-8886-D8482220FAAB">
+        <omgdc:Bounds height="80.0" width="100.0" x="165.0" y="135.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-FD0EDD75-A1F6-49B1-A1F6-0BD4226C20EE" id="BPMNShape_sid-FD0EDD75-A1F6-49B1-A1F6-0BD4226C20EE">
+        <omgdc:Bounds height="40.0" width="40.0" x="310.0" y="155.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-22693457-EE61-4DBB-BBA2-576D84650B2C" id="BPMNShape_sid-22693457-EE61-4DBB-BBA2-576D84650B2C">
+        <omgdc:Bounds height="80.0" width="100.0" x="360.0" y="45.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-E73BF4C9-5022-467D-AF29-3AF66B1A1703" id="BPMNShape_sid-E73BF4C9-5022-467D-AF29-3AF66B1A1703">
+        <omgdc:Bounds height="28.0" width="28.0" x="505.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-2ADB1E3A-83C0-4B92-BA94-A82CA2F74572" id="BPMNEdge_sid-2ADB1E3A-83C0-4B92-BA94-A82CA2F74572">
+        <omgdi:waypoint x="129.9932545528355" y="177.5502023634149"/>
+        <omgdi:waypoint x="165.0" y="176.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-8C7F03DA-BF98-4D85-879E-406F162D39F1" id="BPMNEdge_sid-8C7F03DA-BF98-4D85-879E-406F162D39F1">
+        <omgdi:waypoint x="330.5" y="155.5"/>
+        <omgdi:waypoint x="330.5" y="85.0"/>
+        <omgdi:waypoint x="360.0" y="85.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-391436E7-66C6-46B4-8465-9A649F0AFF8D" id="BPMNEdge_sid-391436E7-66C6-46B4-8465-9A649F0AFF8D">
+        <omgdi:waypoint x="349.2576530612245" y="175.7423469387755"/>
+        <omgdi:waypoint x="510.00116831984127" y="177.81913654160002"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-C9B0A1A2-4A33-40FF-9490-EF40A08D48A0" id="BPMNEdge_sid-C9B0A1A2-4A33-40FF-9490-EF40A08D48A0">
+        <omgdi:waypoint x="265.0" y="175.2164502164502"/>
+        <omgdi:waypoint x="310.4130434782609" y="175.41304347826087"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-E742E135-82CD-4FB0-A64E-60A73617C0B5" id="BPMNEdge_sid-E742E135-82CD-4FB0-A64E-60A73617C0B5">
+        <omgdi:waypoint x="460.0" y="85.0"/>
+        <omgdi:waypoint x="505.0" y="85.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

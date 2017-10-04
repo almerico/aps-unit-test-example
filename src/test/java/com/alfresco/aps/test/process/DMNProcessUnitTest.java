@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,6 +23,7 @@ import com.alfresco.aps.testutils.AbstractTest;
 import com.alfresco.aps.testutils.resources.ActivitiResources;
 
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
@@ -32,10 +34,10 @@ import static com.alfresco.aps.testutils.TestUtilsConstants.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
 @TestPropertySource(value="classpath:local-dev-test.properties")
-public class APSRestStepProcessUnitTest extends AbstractTest {
+public class DMNProcessUnitTest extends AbstractTest {
 	
 	String appName = "Test App";
-	String processDefinitionKey = "APSRestStepProcess";
+	String processDefinitionKey = "DMNProcess";
 	
 	@Before
 	public void before() throws Exception {
@@ -54,23 +56,6 @@ public class APSRestStepProcessUnitTest extends AbstractTest {
 						.addInputStream(bpmnXml, new FileInputStream(bpmnXml)).deploy();
 			}
 		}
-
-		doAnswer(new Answer<Void>() {
-			@Override
-			public Void answer(InvocationOnMock invocation) throws Throwable {
-				
-				Object[] arg = invocation.getArguments();
-				DelegateExecution execution = (DelegateExecution) arg[0];
-				HashMap<String, String> fieldExtensions = new HashMap<String, String>();
-				fieldExtensions.put("restUrl", "https://api.github.com/");
-				fieldExtensions.put("httpMethod", "GET");
-				unitTestHelpers.assertFieldExtensions(2, execution, fieldExtensions);
-				System.out.println("Process ID is " + execution.getProcessInstanceId());
-				// mock as if the rest step sets a variable
-				execution.setVariable("restResponse", "{}");
-				return null;
-			}
-		}).when(activiti_restCallDelegate).execute((DelegateExecution) any());
 	}
 
 	@After
@@ -82,17 +67,65 @@ public class APSRestStepProcessUnitTest extends AbstractTest {
 	}
 
 	@Test
-	public void testProcessExecution() throws Exception {
+	public void testRuleExecutionSuccessPath() throws Exception {
+		Mockito.reset(activiti_executeDecisionDelegate);
+
+		doAnswer(new Answer<Void>() {
+			@Override
+			public Void answer(InvocationOnMock invocation) throws Throwable {
+				
+				Object[] arg = invocation.getArguments();
+				DelegateExecution execution = (DelegateExecution) arg[0];
+				HashMap<String, String> fieldExtensions = new HashMap<String, String>();
+				fieldExtensions.put("decisionTableReferenceKey", "dmntest");
+				unitTestHelpers.assertFieldExtensions(1, execution, fieldExtensions);
+				// mock as if the dmn step sets a variable
+				execution.setVariable("output", "abc");
+				return null;
+			}
+		}).when(activiti_executeDecisionDelegate).execute((DelegateExecution) any());
 
 		ProcessInstance processInstance = activitiRule.getRuntimeService()
 				.startProcessInstanceByKey(processDefinitionKey);
 
 		assertNotNull(processInstance);
 
-		//Wait for async step to execute
-		unitTestHelpers.waitForJobExecutorToProcessAllJobs(5000, 100);
+		verify(activiti_executeDecisionDelegate, times(1)).execute((DelegateExecution) any());
 
-		verify(activiti_restCallDelegate, times(1)).execute((DelegateExecution) any());
+		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+	}
+	
+	@Test
+	public void testRuleExecutionFailPath() throws Exception {
+		
+		Mockito.reset(activiti_executeDecisionDelegate);
+
+		doAnswer(new Answer<Void>() {
+			@Override
+			public Void answer(InvocationOnMock invocation) throws Throwable {
+				
+				Object[] arg = invocation.getArguments();
+				DelegateExecution execution = (DelegateExecution) arg[0];
+				HashMap<String, String> fieldExtensions = new HashMap<String, String>();
+				fieldExtensions.put("decisionTableReferenceKey", "dmntest");
+				unitTestHelpers.assertFieldExtensions(1, execution, fieldExtensions);
+				// do not set any variable as if dmn rules didn't pass
+				return null;
+			}
+		}).when(activiti_executeDecisionDelegate).execute((DelegateExecution) any());
+
+		ProcessInstance processInstance = activitiRule.getRuntimeService()
+				.startProcessInstanceByKey(processDefinitionKey);
+
+		assertNotNull(processInstance);
+
+		verify(activiti_executeDecisionDelegate, times(1)).execute((DelegateExecution) any());
+		
+		assertEquals(1, taskService.createTaskQuery().count());
+		Task rejectTask = taskService.createTaskQuery().singleResult();
+		assertEquals("Rule Not Evaluated", rejectTask.getName());
+		unitTestHelpers.assertUserAssignment("$INITIATOR", rejectTask, false, false);
+		taskService.complete(rejectTask.getId());
 
 		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
 	}
