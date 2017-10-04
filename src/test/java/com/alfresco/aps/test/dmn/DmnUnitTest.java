@@ -1,4 +1,4 @@
-package com.alfresco.aps.test.process;
+package com.alfresco.aps.test.dmn;
 
 import java.util.HashMap;
 import java.util.Map;
