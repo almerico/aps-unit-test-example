@@ -37,7 +37,7 @@ public class UserTaskUnitTest extends AbstractBpmnTest {
 
 		Task task = taskService.createTaskQuery().singleResult();
 		
-		unitTestHelpers.assertTaskDueDate(1, TIME_UNIT_DAY, task);
+		unitTestHelpers.assertTaskDueDate(2, TIME_UNIT_DAY, task);
 
 		unitTestHelpers.assertUserAssignment("$INITIATOR", task, false, false);
 		

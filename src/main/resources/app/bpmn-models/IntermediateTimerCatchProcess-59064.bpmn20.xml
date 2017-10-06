@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171004170221075" modeler:modelId="59064" modeler:modelVersion="3" modeler:modelLastUpdated="1506540422251" modeler:originalModelId="58059" modeler:originalModelVersion="4">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171006100110047" modeler:modelId="59064" modeler:modelVersion="27" modeler:modelLastUpdated="1507298422575">
   <process id="IntermediateTimerCatchProcess" name="IntermediateTimerCatchProcess" isExecutable="true">
     <startEvent id="startEvent1">
       <extensionElements>
@@ -89,28 +89,28 @@
         <omgdc:Bounds height="40.0" width="40.0" x="330.0" y="158.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="sid-9B70A0BC-7033-43A9-8B32-1809AA28A6D0" id="BPMNEdge_sid-9B70A0BC-7033-43A9-8B32-1809AA28A6D0">
-        <omgdi:waypoint x="204.61242603550295" y="178.38757396449705"/>
-        <omgdi:waypoint x="255.00026815913083" y="178.0911748931816"/>
+        <omgdi:waypoint x="205.0" y="178.0"/>
+        <omgdi:waypoint x="255.0" y="178.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-7A5E92E0-CD98-442E-86C6-B7DE6D416FA2" id="BPMNEdge_sid-7A5E92E0-CD98-442E-86C6-B7DE6D416FA2">
-        <omgdi:waypoint x="281.75598615809656" y="102.84519994625822"/>
-        <omgdi:waypoint x="340.48192771084337" y="167.51807228915663"/>
+        <omgdi:waypoint x="280.9231649914928" y="101.97203694032227"/>
+        <omgdi:waypoint x="340.47904191616766" y="167.52095808383234"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-AFD27802-911B-4431-83F5-1096564D9115" id="BPMNEdge_sid-AFD27802-911B-4431-83F5-1096564D9115">
-        <omgdi:waypoint x="369.5840707964602" y="178.41592920353983"/>
-        <omgdi:waypoint x="450.0001358438572" y="178.06167341037948"/>
+        <omgdi:waypoint x="370.0" y="178.0"/>
+        <omgdi:waypoint x="450.0" y="178.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-9B2DD76A-83F9-4D77-B8B9-00FAD9D2F1A5" id="BPMNEdge_sid-9B2DD76A-83F9-4D77-B8B9-00FAD9D2F1A5">
-        <omgdi:waypoint x="119.99971066768252" y="178.0931659047682"/>
-        <omgdi:waypoint x="165.375" y="178.375"/>
+        <omgdi:waypoint x="120.0" y="178.0"/>
+        <omgdi:waypoint x="165.0" y="178.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-35C0426E-82B5-4FDE-A101-3706BC2EC914" id="BPMNEdge_sid-35C0426E-82B5-4FDE-A101-3706BC2EC914">
-        <omgdi:waypoint x="195.32658959537574" y="168.32658959537574"/>
-        <omgdi:waypoint x="259.7315243663378" y="101.64853947955619"/>
+        <omgdi:waypoint x="194.88439306358381" y="167.88439306358381"/>
+        <omgdi:waypoint x="259.6672757577297" y="101.586121300569"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-22786322-3D15-438A-B6DB-7D89A0D96635" id="BPMNEdge_sid-22786322-3D15-438A-B6DB-7D89A0D96635">
-        <omgdi:waypoint x="287.0" y="178.5"/>
-        <omgdi:waypoint x="330.5" y="178.5"/>
+        <omgdi:waypoint x="286.0" y="178.0"/>
+        <omgdi:waypoint x="330.0" y="178.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

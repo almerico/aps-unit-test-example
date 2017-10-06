@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171004170221048" modeler:modelId="62063" modeler:modelVersion="1" modeler:modelLastUpdated="1507153593043">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171006100110051" modeler:modelId="62063" modeler:modelVersion="25" modeler:modelLastUpdated="1507298422558">
   <process id="DMNProcess" name="DMNProcess" isExecutable="true">
     <startEvent id="startEvent1">
       <extensionElements>
@@ -39,6 +39,7 @@
       <extensionElements>
         <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
         <modeler:activiti-idm-initiator><![CDATA[true]]></modeler:activiti-idm-initiator>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
         <modeler:editor-resource-id><![CDATA[sid-22693457-EE61-4DBB-BBA2-576D84650B2C]]></modeler:editor-resource-id>
       </extensionElements>
     </userTask>
@@ -90,17 +91,17 @@
         <omgdi:waypoint x="165.0" y="176.5"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-8C7F03DA-BF98-4D85-879E-406F162D39F1" id="BPMNEdge_sid-8C7F03DA-BF98-4D85-879E-406F162D39F1">
-        <omgdi:waypoint x="330.5" y="155.5"/>
+        <omgdi:waypoint x="330.11049723756906" y="155.11049723756906"/>
         <omgdi:waypoint x="330.5" y="85.0"/>
         <omgdi:waypoint x="360.0" y="85.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-391436E7-66C6-46B4-8465-9A649F0AFF8D" id="BPMNEdge_sid-391436E7-66C6-46B4-8465-9A649F0AFF8D">
-        <omgdi:waypoint x="349.2576530612245" y="175.7423469387755"/>
-        <omgdi:waypoint x="510.00116831984127" y="177.81913654160002"/>
+        <omgdi:waypoint x="349.6954314720812" y="175.30456852791878"/>
+        <omgdi:waypoint x="510.0016736290581" y="177.7835310355009"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-C9B0A1A2-4A33-40FF-9490-EF40A08D48A0" id="BPMNEdge_sid-C9B0A1A2-4A33-40FF-9490-EF40A08D48A0">
-        <omgdi:waypoint x="265.0" y="175.2164502164502"/>
-        <omgdi:waypoint x="310.4130434782609" y="175.41304347826087"/>
+        <omgdi:waypoint x="265.0" y="175.0"/>
+        <omgdi:waypoint x="310.0" y="175.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-E742E135-82CD-4FB0-A64E-60A73617C0B5" id="BPMNEdge_sid-E742E135-82CD-4FB0-A64E-60A73617C0B5">
         <omgdi:waypoint x="460.0" y="85.0"/>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171006100110085" modeler:modelId="62102" modeler:modelVersion="1" modeler:modelLastUpdated="1507296487503">
+  <process id="APSAlfrescoDocumentPublish" name="APSAlfrescoDocumentPublish" isExecutable="true">
+    <startEvent id="startEvent1" name="start">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[startEvent1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </startEvent>
+    <sequenceFlow id="sid-94A9A453-228F-4AF0-BE1F-2A4B0219584E" sourceRef="startEvent1" targetRef="sid-7F02B966-C3F9-4D6B-9843-005EAC28F0CC">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-94A9A453-228F-4AF0-BE1F-2A4B0219584E]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <endEvent id="sid-31EAC34A-0D89-45A9-BA4F-F8D378B017AC" name="end">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-31EAC34A-0D89-45A9-BA4F-F8D378B017AC]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="sid-0C3BB002-C393-4A34-8588-555688A71C45" sourceRef="sid-7F02B966-C3F9-4D6B-9843-005EAC28F0CC" targetRef="sid-31EAC34A-0D89-45A9-BA4F-F8D378B017AC">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-0C3BB002-C393-4A34-8588-555688A71C45]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <serviceTask id="sid-7F02B966-C3F9-4D6B-9843-005EAC28F0CC" name="publish to alfresco" activiti:async="true" activiti:delegateExpression="${activiti_publishAlfrescoDelegate}">
+      <extensionElements>
+        <activiti:field name="contentSource">
+          <activiti:string><![CDATA[process]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="account">
+          <activiti:string><![CDATA[alfresco-2002-alfresco-2]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="site">
+          <activiti:string><![CDATA[my-site]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="publishAsType">
+          <activiti:string><![CDATA[process_initiator]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="path">
+          <activiti:string><![CDATA[d93f3e61-e3ff-46d5-9a1c-a0671eb2089a]]></activiti:string>
+        </activiti:field>
+        <modeler:publish-task-type><![CDATA[alfresco]]></modeler:publish-task-type>
+        <modeler:site_title><![CDATA[my-site]]></modeler:site_title>
+        <modeler:path_title><![CDATA[documentLibrary]]></modeler:path_title>
+        <modeler:editor-resource-id><![CDATA[sid-7F02B966-C3F9-4D6B-9843-005EAC28F0CC]]></modeler:editor-resource-id>
+      </extensionElements>
+    </serviceTask>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_APSAlfrescoDocumentPublish">
+    <bpmndi:BPMNPlane bpmnElement="APSAlfrescoDocumentPublish" id="BPMNPlane_APSAlfrescoDocumentPublish">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-31EAC34A-0D89-45A9-BA4F-F8D378B017AC" id="BPMNShape_sid-31EAC34A-0D89-45A9-BA4F-F8D378B017AC">
+        <omgdc:Bounds height="28.0" width="28.0" x="320.0" y="164.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-7F02B966-C3F9-4D6B-9843-005EAC28F0CC" id="BPMNShape_sid-7F02B966-C3F9-4D6B-9843-005EAC28F0CC">
+        <omgdc:Bounds height="80.0" width="100.0" x="175.0" y="138.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-94A9A453-228F-4AF0-BE1F-2A4B0219584E" id="BPMNEdge_sid-94A9A453-228F-4AF0-BE1F-2A4B0219584E">
+        <omgdi:waypoint x="130.0" y="178.0"/>
+        <omgdi:waypoint x="175.0" y="178.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0C3BB002-C393-4A34-8588-555688A71C45" id="BPMNEdge_sid-0C3BB002-C393-4A34-8588-555688A71C45">
+        <omgdi:waypoint x="275.0" y="178.0"/>
+        <omgdi:waypoint x="320.0" y="178.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

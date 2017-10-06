@@ -1,15 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171004170221069" modeler:modelId="58059" modeler:modelVersion="6" modeler:modelLastUpdated="1506540422302">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171006100110042" modeler:modelId="58059" modeler:modelVersion="30" modeler:modelLastUpdated="1507301655378">
   <process id="UserTaskProcess" name="UserTaskProcess" isExecutable="true">
     <startEvent id="startEvent1">
       <extensionElements>
         <modeler:editor-resource-id><![CDATA[startEvent1]]></modeler:editor-resource-id>
       </extensionElements>
     </startEvent>
-    <userTask id="sid-AB2E4A5F-4BF6-48BE-8FF1-CDE01687E69A" activiti:assignee="$INITIATOR" activiti:dueDate="P1D">
+    <userTask id="sid-AB2E4A5F-4BF6-48BE-8FF1-CDE01687E69A" activiti:assignee="$INITIATOR" activiti:dueDate="P2D">
       <extensionElements>
         <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
         <modeler:activiti-idm-initiator><![CDATA[true]]></modeler:activiti-idm-initiator>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
         <modeler:editor-resource-id><![CDATA[sid-AB2E4A5F-4BF6-48BE-8FF1-CDE01687E69A]]></modeler:editor-resource-id>
       </extensionElements>
     </userTask>
@@ -35,18 +36,20 @@
         <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-AB2E4A5F-4BF6-48BE-8FF1-CDE01687E69A" id="BPMNShape_sid-AB2E4A5F-4BF6-48BE-8FF1-CDE01687E69A">
-        <omgdc:Bounds height="80.0" width="100.0" x="175.0" y="138.0"/>
+        <omgdc:Bounds height="80.0" width="100.0" x="165.0" y="135.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-05C0B319-D826-40F8-B22B-4839EAE1CC54" id="BPMNShape_sid-05C0B319-D826-40F8-B22B-4839EAE1CC54">
         <omgdc:Bounds height="28.0" width="28.0" x="320.0" y="164.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="sid-C9DA9AC2-2007-400E-929A-F35E34440118" id="BPMNEdge_sid-C9DA9AC2-2007-400E-929A-F35E34440118">
-        <omgdi:waypoint x="275.0" y="178.0"/>
+        <omgdi:waypoint x="265.0" y="175.0"/>
+        <omgdi:waypoint x="292.5" y="175.0"/>
+        <omgdi:waypoint x="292.5" y="178.0"/>
         <omgdi:waypoint x="320.0" y="178.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-A42B2EA8-41F4-4835-80E4-476DC7E1F88F" id="BPMNEdge_sid-A42B2EA8-41F4-4835-80E4-476DC7E1F88F">
-        <omgdi:waypoint x="130.0" y="178.0"/>
-        <omgdi:waypoint x="175.0" y="178.0"/>
+        <omgdi:waypoint x="129.9932545528355" y="177.5502023634149"/>
+        <omgdi:waypoint x="165.0" y="176.5"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
