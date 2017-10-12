@@ -7,15 +7,18 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.TaskAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
-@TestPropertySource(value="classpath:local-dev-test.properties")
+@TestPropertySource(value = "classpath:local-dev-test.properties")
 public class UserAssignmentUnitTest extends AbstractBpmnTest {
-	
+
 	static {
 		appName = "Test App";
 		processDefinitionKey = "UserAssignment";
@@ -24,17 +27,17 @@ public class UserAssignmentUnitTest extends AbstractBpmnTest {
 	@Test
 	public void testProcessExecution() throws Exception {
 
-		ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(processDefinitionKey);
+		ProcessInstance processInstance = activitiRule.getRuntimeService()
+				.startProcessInstanceByKey(processDefinitionKey);
 
 		assertNotNull(processInstance);
-		
+
 		assertEquals(1, taskService.createTaskQuery().count());
 		Task task = taskService.createTaskQuery().singleResult();
-		unitTestHelpers.assertUserAssignment("user1@example.com", task, true, false);
-		
-		taskService.complete(task.getId());
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		TaskAssert.assertThat(task).hasAssignee("user1@example.com", true, false).complete();
+		
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

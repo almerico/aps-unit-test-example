@@ -7,6 +7,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
 
@@ -33,7 +35,7 @@ public class EmailTaskProcessUnitTest extends AbstractBpmnTest {
 		
 		actualEmails.removeAll(actualEmails);
 		
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

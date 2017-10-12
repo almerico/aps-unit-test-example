@@ -12,6 +12,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.TaskAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import static org.junit.Assert.*;
@@ -19,9 +22,9 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
-@TestPropertySource(value="classpath:local-dev-test.properties")
+@TestPropertySource(value = "classpath:local-dev-test.properties")
 public class DMNProcessUnitTest extends AbstractBpmnTest {
-	
+
 	static {
 		appName = "Test App";
 		processDefinitionKey = "DMNProcess";
@@ -34,7 +37,7 @@ public class DMNProcessUnitTest extends AbstractBpmnTest {
 		doAnswer(new Answer<Void>() {
 			@Override
 			public Void answer(InvocationOnMock invocation) throws Throwable {
-				
+
 				Object[] arg = invocation.getArguments();
 				DelegateExecution execution = (DelegateExecution) arg[0];
 				HashMap<String, String> fieldExtensions = new HashMap<String, String>();
@@ -53,18 +56,18 @@ public class DMNProcessUnitTest extends AbstractBpmnTest {
 
 		verify(activiti_executeDecisionDelegate, times(1)).execute((DelegateExecution) any());
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
-	
+
 	@Test
 	public void testRuleExecutionFailPath() throws Exception {
-		
+
 		Mockito.reset(activiti_executeDecisionDelegate);
 
 		doAnswer(new Answer<Void>() {
 			@Override
 			public Void answer(InvocationOnMock invocation) throws Throwable {
-				
+
 				Object[] arg = invocation.getArguments();
 				DelegateExecution execution = (DelegateExecution) arg[0];
 				HashMap<String, String> fieldExtensions = new HashMap<String, String>();
@@ -81,14 +84,15 @@ public class DMNProcessUnitTest extends AbstractBpmnTest {
 		assertNotNull(processInstance);
 
 		verify(activiti_executeDecisionDelegate, times(1)).execute((DelegateExecution) any());
-		
-		assertEquals(1, taskService.createTaskQuery().count());
-		Task rejectTask = taskService.createTaskQuery().singleResult();
-		assertEquals("Rule Not Evaluated", rejectTask.getName());
-		unitTestHelpers.assertUserAssignment("$INITIATOR", rejectTask, false, false);
-		taskService.complete(rejectTask.getId());
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		assertEquals(1, taskService.createTaskQuery().count());
+
+		Task rejectTask = taskService.createTaskQuery().singleResult();
+
+		TaskAssert.assertThat(rejectTask).hasAssignee("$INITIATOR", false, false)
+				.hasName("Rule Not Evaluated").complete();
+
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

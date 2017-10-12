@@ -9,6 +9,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.TaskAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import static org.junit.Assert.*;
@@ -37,14 +40,12 @@ public class GatewaysAndConditionsUnitTest extends AbstractBpmnTest {
 
 		Task task = taskService.createTaskQuery().singleResult();
 
-		unitTestHelpers.assertUserAssignment("$INITIATOR", task, false, false);
-
 		Map<String, Object> taskCompleteVars = new HashMap<String, Object>();
 		processVars.put(unitTestHelpers.getTaskOutcomeVariable(task), "Approve");
 
-		taskService.complete(task.getId(), taskCompleteVars);
+		TaskAssert.assertThat(task).hasAssignee("$INITIATOR", false, false).complete(taskCompleteVars);
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 	@Test
@@ -61,18 +62,17 @@ public class GatewaysAndConditionsUnitTest extends AbstractBpmnTest {
 
 		Task task = taskService.createTaskQuery().singleResult();
 
-		unitTestHelpers.assertUserAssignment("$INITIATOR", task, false, false);
-
 		Map<String, Object> taskCompleteVars = new HashMap<String, Object>();
 		taskCompleteVars.put(unitTestHelpers.getTaskOutcomeVariable(task), "Reject");
-		taskService.complete(task.getId(), taskCompleteVars);
+
+		TaskAssert.assertThat(task).hasAssignee("$INITIATOR", false, false).complete(taskCompleteVars);
 
 		assertEquals(1, taskService.createTaskQuery().count());
 		Task rejectTask = taskService.createTaskQuery().singleResult();
-		assertEquals("rejected", rejectTask.getName());
-		unitTestHelpers.assertUserAssignment("$INITIATOR", rejectTask, false, false);
-		taskService.complete(rejectTask.getId());
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		TaskAssert.assertThat(rejectTask).hasName("rejected").hasAssignee("$INITIATOR", false, false)
+				.complete();
+
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 }

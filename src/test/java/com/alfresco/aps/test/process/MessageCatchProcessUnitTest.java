@@ -7,6 +7,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
 
@@ -39,7 +41,7 @@ public class MessageCatchProcessUnitTest extends AbstractBpmnTest {
 		//Assert boundary message and execute
 		unitTestHelpers.assertMessageWait(1, null, "message-boundary", true, null);
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

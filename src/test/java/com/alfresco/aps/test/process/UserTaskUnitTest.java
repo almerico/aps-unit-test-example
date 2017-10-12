@@ -10,6 +10,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.TaskAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import static com.alfresco.aps.testutils.TestUtilsConstants.*;
@@ -17,9 +20,9 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
-@TestPropertySource(value="classpath:local-dev-test.properties")
+@TestPropertySource(value = "classpath:local-dev-test.properties")
 public class UserTaskUnitTest extends AbstractBpmnTest {
-	
+
 	static {
 		appName = "Test App";
 		processDefinitionKey = "UserTaskProcess";
@@ -29,21 +32,18 @@ public class UserTaskUnitTest extends AbstractBpmnTest {
 	public void testProcessExecution() throws Exception {
 		Map<String, Object> processVars = new HashMap<String, Object>();
 		processVars.put("initiator", "$INITIATOR");
-		ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(processDefinitionKey, processVars);
+		ProcessInstance processInstance = activitiRule.getRuntimeService()
+				.startProcessInstanceByKey(processDefinitionKey, processVars);
 
 		assertNotNull(processInstance);
-		
+
 		assertEquals(1, taskService.createTaskQuery().count());
 
 		Task task = taskService.createTaskQuery().singleResult();
-		
-		unitTestHelpers.assertTaskDueDate(2, TIME_UNIT_DAY, task);
+		TaskAssert.assertThat(task).hasAssignee("$INITIATOR", false, false).hasDueDate(2, TIME_UNIT_DAY)
+				.complete();
 
-		unitTestHelpers.assertUserAssignment("$INITIATOR", task, false, false);
-		
-		taskService.complete(task.getId());
-
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

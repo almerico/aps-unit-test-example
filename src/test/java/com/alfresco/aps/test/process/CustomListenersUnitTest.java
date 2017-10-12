@@ -21,6 +21,8 @@ import com.alfresco.aps.example.listeners.ProcessEndExecutionListener;
 import com.alfresco.aps.example.listeners.TaskAssignedTaskListener;
 import com.alfresco.aps.example.listeners.TimerFiredEventListener;
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import static com.alfresco.aps.testutils.TestUtilsConstants.*;
@@ -108,7 +110,7 @@ public class CustomListenersUnitTest extends AbstractBpmnTest {
 		
 		verify(processEndExecutionListener, times(1)).notify((DelegateExecution) any());
 		
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 		
 		Map<String, Object> variablesToAssert = new HashMap<String, Object>();
 		variablesToAssert.put("taskAssignedTaskListener", "executed");

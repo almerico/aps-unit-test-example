@@ -7,6 +7,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.TaskAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import static org.junit.Assert.*;
@@ -29,12 +32,12 @@ public class CandidateUserAssignmentUnitTest extends AbstractBpmnTest {
 		assertNotNull(processInstance);
 		
 		assertEquals(1, taskService.createTaskQuery().count());
-		Task task = taskService.createTaskQuery().singleResult();
-		unitTestHelpers.assertCandidateAssignment(null, new String[]{"user1@example.com", "user2@example.com"}, task, true, false);
 		
-		taskService.complete(task.getId());
-
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		Task task = taskService.createTaskQuery().singleResult();
+		
+		TaskAssert.assertThat(task).hasCandidateUsers(new String[]{"user1@example.com", "user2@example.com"}, true, false).complete();
+		
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

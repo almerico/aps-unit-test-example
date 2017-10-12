@@ -7,6 +7,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.TaskAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import static org.junit.Assert.*;
@@ -30,11 +33,10 @@ public class CandidateGroupAssignmentUnitTest extends AbstractBpmnTest {
 		
 		assertEquals(1, taskService.createTaskQuery().count());
 		Task task = taskService.createTaskQuery().singleResult();
-		unitTestHelpers.assertCandidateAssignment(new String[]{"group1", "group2"}, null, task, true, false);
 		
-		taskService.complete(task.getId());
-
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		TaskAssert.assertThat(task).hasCandidateGroups(new String[]{"group1", "group2"}, true, false).complete();
+		
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

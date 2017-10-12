@@ -7,6 +7,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
 import static com.alfresco.aps.testutils.TestUtilsConstants.*;
@@ -31,7 +33,7 @@ public class BoundaryTimerCatchProcessUnitTest extends AbstractBpmnTest {
 		
 		unitTestHelpers.assertReceiveTask(2, true, null, processDefinitionId);
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 	
 	@Test
@@ -48,7 +50,7 @@ public class BoundaryTimerCatchProcessUnitTest extends AbstractBpmnTest {
 		//Assert days and execute/action timer
 		unitTestHelpers.assertTimerJob(1, 1, TIME_UNIT_DAY, true);
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }

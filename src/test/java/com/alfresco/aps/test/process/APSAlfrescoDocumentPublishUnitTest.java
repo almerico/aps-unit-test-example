@@ -11,6 +11,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
+import com.alfresco.aps.testutils.ProcessInstanceAssert;
+
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -54,7 +56,7 @@ public class APSAlfrescoDocumentPublishUnitTest extends AbstractBpmnTest {
 
 		verify(activiti_publishAlfrescoDelegate, times(1)).execute((DelegateExecution) any());
 
-		unitTestHelpers.assertNullProcessInstance(processInstance.getProcessInstanceId());
+		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }
