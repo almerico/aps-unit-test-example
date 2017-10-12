@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
-import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.assertions.ProcessInstanceAssert;
 
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
 public class ReceiveTaskProcessUnitTest extends AbstractBpmnTest {
-	
+
 	static {
 		appName = "Test App";
 		processDefinitionKey = "ReceiveTaskProcess";
@@ -27,10 +27,9 @@ public class ReceiveTaskProcessUnitTest extends AbstractBpmnTest {
 				.startProcessInstanceByKey(processDefinitionKey);
 
 		assertNotNull(processInstance);
-		
-		unitTestHelpers.assertReceiveTask(1, true, null, processDefinitionId);
 
-		ProcessInstanceAssert.assertThat(processInstance).isComplete();
+		ProcessInstanceAssert.assertThat(processInstance).receiveTaskCountIs(1).executeReceiveTasks().isComplete();
+
 	}
 
 }

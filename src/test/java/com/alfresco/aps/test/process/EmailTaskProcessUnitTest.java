@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
-import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.assertions.ProcessInstanceAssert;
 
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;

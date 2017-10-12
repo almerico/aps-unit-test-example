@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
-import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.assertions.ProcessInstanceAssert;
 
 import org.activiti.engine.runtime.ProcessInstance;
 import static com.alfresco.aps.testutils.TestUtilsConstants.*;
@@ -28,14 +28,10 @@ public class IntermediateTimerCatchProcessUnitTest extends AbstractBpmnTest {
 				.startProcessInstanceByKey(processDefinitionKey);
 
 		assertNotNull(processInstance);
-
-
-		//Assert in seconds and execute/action timer
-		unitTestHelpers.assertTimerJob(1, 5, TIME_UNIT_MINUTE, true);
-		//Assert days and execute/action timer
-		unitTestHelpers.assertTimerJob(1, 1, TIME_UNIT_DAY, true);
-
-		ProcessInstanceAssert.assertThat(processInstance).isComplete();
+		
+		ProcessInstanceAssert.assertThat(processInstance).timerJobCountIs(2)
+				.timerJobsWithDueDateFromNow(5, TIME_UNIT_MINUTE).timerJobsWithDueDateFromNow(1, TIME_UNIT_DAY)
+				.executeTimerJobs(5, TIME_UNIT_MINUTE).executeTimerJobs(1, TIME_UNIT_DAY).isComplete();
 	}
 
 }

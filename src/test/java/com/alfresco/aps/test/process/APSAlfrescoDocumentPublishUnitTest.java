@@ -10,7 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
-import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.assertions.DelegateExecutionAssert;
+import com.alfresco.aps.testutils.assertions.ProcessInstanceAssert;
 
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
@@ -39,7 +40,7 @@ public class APSAlfrescoDocumentPublishUnitTest extends AbstractBpmnTest {
 				fieldExtensions.put("account", "alfresco-2002-alfresco-2");
 				fieldExtensions.put("site", "my-site");
 				fieldExtensions.put("publishAsType", "process_initiator");
-				unitTestHelpers.assertFieldExtensions(5, execution, fieldExtensions);
+				DelegateExecutionAssert.assertThat(execution).assertFieldExtensions(5, fieldExtensions);
 				return null;
 			}
 		}).when(activiti_publishAlfrescoDelegate).execute((DelegateExecution) any());

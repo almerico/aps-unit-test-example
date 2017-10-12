@@ -11,7 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
-import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.assertions.DelegateExecutionAssert;
+import com.alfresco.aps.testutils.assertions.ProcessInstanceAssert;
 
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
@@ -38,7 +39,7 @@ public class APSRestStepProcessUnitTest extends AbstractBpmnTest {
 				HashMap<String, String> fieldExtensions = new HashMap<String, String>();
 				fieldExtensions.put("restUrl", "https://api.github.com/");
 				fieldExtensions.put("httpMethod", "GET");
-				unitTestHelpers.assertFieldExtensions(2, execution, fieldExtensions);
+				DelegateExecutionAssert.assertThat(execution).assertFieldExtensions(2, fieldExtensions);
 				System.out.println("Process ID is " + execution.getProcessInstanceId());
 				// mock as if the rest step sets a variable
 				execution.setVariable("restResponse", "{}");

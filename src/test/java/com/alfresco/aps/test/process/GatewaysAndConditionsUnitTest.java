@@ -8,8 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
-import com.alfresco.aps.testutils.ProcessInstanceAssert;
-import com.alfresco.aps.testutils.TaskAssert;
+import com.alfresco.aps.testutils.assertions.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.assertions.TaskAssert;
 
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;

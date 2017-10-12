@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.testutils.AbstractBpmnTest;
-import com.alfresco.aps.testutils.ProcessInstanceAssert;
+import com.alfresco.aps.testutils.assertions.ProcessInstanceAssert;
 
 import org.activiti.engine.runtime.ProcessInstance;
 import static org.junit.Assert.*;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml" })
 public class SignalCatchProcessUnitTest extends AbstractBpmnTest {
-	
+
 	static {
 		appName = "Test App";
 		processDefinitionKey = "SignalCatch";
@@ -28,18 +28,11 @@ public class SignalCatchProcessUnitTest extends AbstractBpmnTest {
 
 		assertNotNull(processInstance);
 
+		ProcessInstanceAssert.assertThat(processInstance).signalWaitCountIs(1, "signal-catch")
+				.executeSignalWaitAtivities("signal-catch", null).signalWaitCountIs(1, "signal-boundary")
+				.executeSignalWaitAtivities("signal-boundary", null)
+				.isComplete();
 
-		//Assert signal and not execute
-		unitTestHelpers.assertSignalWait(1, null, "signal-catch", false, null);
-		//Assert boundary signal and not execute
-		unitTestHelpers.assertSignalWait(1, null, "signal-boundary", false, null);
-		
-		//Assert signal and execute
-		unitTestHelpers.assertSignalWait(1, null, "signal-catch", true, null);
-		//Assert boundary signal and execute
-		unitTestHelpers.assertSignalWait(1, null, "signal-boundary", true, null);
-
-		ProcessInstanceAssert.assertThat(processInstance).isComplete();
 	}
 
 }
