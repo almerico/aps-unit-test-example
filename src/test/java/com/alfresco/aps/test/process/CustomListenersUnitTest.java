@@ -14,7 +14,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alfresco.aps.example.listeners.ProcessEndExecutionListener;
@@ -31,7 +30,6 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:activiti.cfg.xml", "classpath:common-beans-and-mocks.xml", "classpath:process-beans-and-mocks.xml" })
-@TestPropertySource(value="classpath:local-dev-test.properties")
 public class CustomListenersUnitTest extends AbstractBpmnTest {
 	
 	static {
