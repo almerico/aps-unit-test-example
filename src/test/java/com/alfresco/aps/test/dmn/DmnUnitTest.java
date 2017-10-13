@@ -30,6 +30,20 @@ public class DmnUnitTest extends AbstractDmnTest {
 		Assert.assertEquals(1, result.getResultVariables().size());
 		Assert.assertSame(result.getResultVariables().get("output").getClass(), String.class);
 		Assert.assertEquals(result.getResultVariables().get("output"), "abc");
+		
+		processVariablesInput.put("input", "123");
+		result = ruleService.executeDecisionByKey(decisonTableKey, processVariablesInput);
+		Assert.assertNotNull(result);
+		Assert.assertEquals(1, result.getResultVariables().size());
+		Assert.assertSame(result.getResultVariables().get("output").getClass(), String.class);
+		Assert.assertEquals(result.getResultVariables().get("output"), "abc");
+		
+		processVariablesInput.put("input", "abc");
+		result = ruleService.executeDecisionByKey(decisonTableKey, processVariablesInput);
+		Assert.assertNotNull(result);
+		Assert.assertEquals(1, result.getResultVariables().size());
+		Assert.assertSame(result.getResultVariables().get("output").getClass(), String.class);
+		Assert.assertEquals(result.getResultVariables().get("output"), "abc");
 	}
 	
 	@Test

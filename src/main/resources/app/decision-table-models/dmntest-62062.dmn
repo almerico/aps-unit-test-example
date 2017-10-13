@@ -15,6 +15,22 @@
           <text>"abc"</text>
         </outputEntry>
       </rule>
+      <rule>
+        <inputEntry id="inputEntry_inputExpression_3_2">
+          <text>== "123"</text>
+        </inputEntry>
+        <outputEntry id="outputEntry_outputExpression_4_2">
+          <text>"abc"</text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_inputExpression_3_3">
+          <text>== "abc"</text>
+        </inputEntry>
+        <outputEntry id="outputEntry_outputExpression_4_3">
+          <text>"abc"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
 </definitions>
