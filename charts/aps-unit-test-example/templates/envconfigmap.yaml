@@ -1,0 +1,15 @@
+apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: special-config
+   data:
+      artifactName: "aps-unit-test-example"
+      artifactVersion: "{{ .TAG }}"
+      apsAppName: "emailbpm-aps"
+      apsPackageName: "com/alfresco/aps"
+      apsApiUser: "admin@app.activiti.com"
+      apsApiPassword: "admin"
+      apsHost: "localhost"
+      apsPort: "8080"
+      apsApiUri: "activiti-app/api/enterprise"
+      renewIdm: "true"

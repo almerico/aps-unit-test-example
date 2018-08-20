@@ -1,0 +1,63 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: installzip
+spec:
+  template:
+    spec:
+      containers: 
+      - name: installzip
+        #image: byrnedo/alpine-curl
+        image: almerico/aps-unit-test-example
+        command: [ "curl -X POST -u $apsApiUser:$apsApiPassword -F file=@/opt/$artifactName-$artifactVersion-App.zip http://$apsHost:$apsPort/$apsApiUri/app-definitions/import?renewIdmEntries=$renewIdm" ]
+        env:
+           - name: apsApiUser
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: apsApiUser
+           - name: apsApiPassword
+             valueFrom:
+               configMapKeyRef:
+                 name: env-config
+                 key: apsApiPassword
+           - name: apsApiUser
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: apsApiUser
+           - name: artifactName
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: artifactName
+           - name: artifactVersion
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: artifactVersion
+           - name: apsHost
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: apsHost
+           - name: apsPort
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: apsPort
+           - name: apsApiUri
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: apsApiUri
+           - name: renewIdm
+             valueFrom:
+               configMapKeyRef:
+                 name: special-config
+                 key: renewIdm
+     restartPolicy: Never
+        
+
+      restartPolicy: Never
+  backoffLimit: 1
