@@ -1,4 +1,9 @@
-FROM openjdk:8-jdk-slim
+#FROM openjdk:8-jdk-slim
+FROM centos
+
+RUN yum install nc -y
+RUN yum install -y iproute
+
 ENV PORT 8080
 ENV CLASSPATH /opt/lib
 EXPOSE 8080
@@ -10,5 +15,8 @@ COPY pom.xml target/lib* /opt/lib/
 # but at least this means we don't have to guess the name
 # we could do with a better way to know the name - or to always create an app.jar or something
 COPY target/*.jar /opt/app.jar
+COPY target/*.zip /opt/app.zip
+
 WORKDIR /opt
+
 CMD ["java", "-jar", "app.jar"]
