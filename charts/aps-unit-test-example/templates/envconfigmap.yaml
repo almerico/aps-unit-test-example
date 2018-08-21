@@ -4,7 +4,7 @@ apiVersion: v1
      name: special-config
    data:
       artifactName: "aps-unit-test-example"
-      artifactVersion: "{{ .TAG }}"
+      artifactVersion: "{{ .Values.image.tag }}"
       apsAppName: "emailbpm-aps"
       apsPackageName: "com/alfresco/aps"
       apsApiUser: "admin@app.activiti.com"
